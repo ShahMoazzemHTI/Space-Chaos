@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float flashInterval = 0.2f;
     SpriteRenderer spriteRenderer;
 
-    Collider2D collider;
+    
 
     [Header("Caches")]
     float currentEnegry;
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        collider = GetComponent<Collider2D>();
+        
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultMaterial = spriteRenderer.material;
@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
 
         while (elapsedTIme < invisibilityTime)
         {
-            collider.enabled = false;
+            GetComponent<Collider2D>().enabled = false;
             spriteRenderer.material = isWhite ? whiteFlashMaterial : defaultMaterial;
             isWhite = !isWhite;
 
@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
             elapsedTIme += flashInterval / 2f;
 
         }
-        collider.enabled = true;
+        GetComponent<Collider2D>().enabled = true;
         spriteRenderer.material = defaultMaterial;
         
     }
