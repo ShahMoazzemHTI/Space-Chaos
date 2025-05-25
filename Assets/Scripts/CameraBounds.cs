@@ -3,18 +3,27 @@ using UnityEngine;
 public class CameraBounds : MonoBehaviour
 {
 
-    public static CameraBounds Instance;
+    public static CameraBounds Instance { get; private set; }
+
+    // Public read-only bounds
+    public float MinX { get; private set; }
+    public float MaxX { get; private set; }
+    public float MinY { get; private set; }
+    public float MaxY { get; private set; }
 
     void Awake()
     {
         if (Instance != null)
         {
             Destroy(gameObject);
+            return;
         }
         else
         {
             Instance = this;
         }
+
+        CalculateBounds(); // Initialize values
     }
 
     public struct Bounds
@@ -44,6 +53,25 @@ public class CameraBounds : MonoBehaviour
         float maxY = orthographicSize - paddingY;
 
         return new Bounds(minX, maxX, minY, maxY);
+    }
+
+    private void CalculateBounds()
+    {
+        float orthographicSize = Camera.main.orthographicSize;
+        float horizontalExtent = orthographicSize * Camera.main.aspect;
+
+        // float paddingX = 0.5f;
+        // float paddingY = 0.5f;
+
+        // MinX = -horizontalExtent + paddingX;
+        // MaxX = horizontalExtent - paddingX;
+        // MinY = -orthographicSize + paddingY;
+        // MaxY = orthographicSize - paddingY;
+
+        MinX = -horizontalExtent ;
+        MaxX = horizontalExtent ;
+        MinY = -orthographicSize ;
+        MaxY = orthographicSize ;
     }
 }
 

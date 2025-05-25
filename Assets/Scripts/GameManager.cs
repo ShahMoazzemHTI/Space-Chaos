@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public float worldSpeed;
 
+
+
+   
+
     void Awake()
     {
         if (Instance != null)

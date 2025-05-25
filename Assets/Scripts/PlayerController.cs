@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxEnergy;
     [SerializeField] float energyLossRate;
     [SerializeField] float energyRegenRate;
+    [SerializeField] ParticleSystem engineBoostParticale;
     [SerializeField, Range(0f, 1f), Tooltip("Minimum energy (0-1) required to enable boost, e.g., 0.2 means 20% of maxEnergy")]
     float minEnergyPercentNormalized = 0.2f; // e.g., 0.2 = 20%
 
@@ -77,7 +78,7 @@ public class PlayerController : MonoBehaviour
         UIController.Instance.UpdateEnergySlider(currentEnegry, maxEnergy);
         UIController.Instance.UpdateHealthSlider(currentHealth, maxHealth);
         // GetCameraBound();
-        Debug.Log($"min x --> {minX} \n max x --> {maxX} \n min y --> {minY} \n max y --> {maxY}");
+        // Debug.Log($"min x --> {minX} \n max x --> {maxX} \n min y --> {minY} \n max y --> {maxY}");
         var bounds = CameraBounds.Instance.GetCameraBounds(); //⚠️⚠️⚠️⚠️⚠️CameraBounds class must be attaced to any gameObject.in this case it attached to the mainCamera
         minX = bounds.minX;
         maxX = bounds.maxX;
@@ -125,6 +126,12 @@ public class PlayerController : MonoBehaviour
             UIController.Instance.UpdateEnergySlider(currentEnegry, maxEnergy);
         }
 
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            PhaserWeapon.Instance.shoot();
+        }
+
         BoundPlayerPositionInsideScreen();
 
 
@@ -145,6 +152,7 @@ public class PlayerController : MonoBehaviour
 
         boost = boostPower;
         isBoosting = true;
+        engineBoostParticale.Play();
         AudioManager.Instance.PlaySound(AudioManager.Instance.fire);
         animator.SetBool("Boosting", true);
     }

@@ -140,6 +140,11 @@ MonoBehaviour:
   - {fileID: -82204115, guid: 10de1c057f2d55149af25f35c80abdec, type: 3}
   - {fileID: -1284975024, guid: 10de1c057f2d55149af25f35c80abdec, type: 3}
   - {fileID: -654367394, guid: 10de1c057f2d55149af25f35c80abdec, type: 3}
+  invisibilityTime: 2
+  whiteFlashMaterial: {fileID: 2100000, guid: abdeabd7c6ff10949bd21f09873eab16, type: 2}
+  flashInterval: 0.2
+  life: 5
+  destroyEffect: {fileID: 2068871558556623593, guid: 2780d8baf6b594f4db874e45198d87b6, type: 3}
 --- !u!50 &2847312256052432644
 Rigidbody2D:
   serializedVersion: 5
