@@ -8,7 +8,7 @@ public class Astroid : MonoBehaviour
     [SerializeField] Material whiteFlashMaterial;
     [SerializeField] float flashInterval;
 
-    [SerializeField] int life;
+    [SerializeField] int live;
     [SerializeField] GameObject destroyEffect;
 
     Material defaultMaterial;
@@ -51,16 +51,25 @@ public class Astroid : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("Player"))
         {
-            life--;
-            if (life <= 0)
-            {
-                AudioManager.Instance.PlayModifiedSound(AudioManager.Instance.boom2);
-                Instantiate(destroyEffect, transform.position, transform.rotation);
-                Destroy(gameObject);
-            }
-            AudioManager.Instance.PlayModifiedSound(AudioManager.Instance.hitRock);
-            StartCoroutine(WhiteFlash());
+            TakeDamage(1);
         }
+        else if (collision.gameObject.CompareTag("Boss"))
+        {
+            TakeDamage(10);
+        }
+    }
+
+    private void TakeDamage(int damage)
+    {
+        live -= damage;
+        if (live <= 0)
+        {
+            AudioManager.Instance.PlayModifiedSound(AudioManager.Instance.boom2);
+            Instantiate(destroyEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+        AudioManager.Instance.PlayModifiedSound(AudioManager.Instance.hitRock);
+        StartCoroutine(WhiteFlash());
     }
 
     IEnumerator WhiteFlash()

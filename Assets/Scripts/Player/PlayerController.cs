@@ -21,8 +21,9 @@ public class PlayerController : MonoBehaviour
 
     //Health
     [Header("Health Setting")]
-    [SerializeField] float maxHealth;
-    [SerializeField] float hitAmount;
+    [SerializeField] int maxHealth;
+    [SerializeField] int normalHit;
+    [SerializeField] int bossHit;
     [SerializeField] GameObject destroyBlastEffect;
 
     //hit and white flash
@@ -170,20 +171,29 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            currentHealth -= hitAmount;
-            UIController.Instance.UpdateHealthSlider(currentHealth, maxHealth);
-            AudioManager.Instance.PlaySound(AudioManager.Instance.hit);
-            StartCoroutine(WhiteFlash());
+            TakeDamage(normalHit);
+        }
+        if (collision.gameObject.CompareTag("Boss"))
+        {
+            TakeDamage(bossHit);
         }
 
         if (currentHealth <= 0)
-        {
-            gameObject.SetActive(false);
-            Instantiate(destroyBlastEffect, transform.position, transform.rotation);
-            boost = 0f;
-            GameManager.Instance.GameOver();
-            AudioManager.Instance.PlaySound(AudioManager.Instance.ice);
-        }
+            {
+                gameObject.SetActive(false);
+                Instantiate(destroyBlastEffect, transform.position, transform.rotation);
+                boost = 0f;
+                GameManager.Instance.GameOver();
+                AudioManager.Instance.PlaySound(AudioManager.Instance.ice);
+            }
+    }
+
+    private void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        UIController.Instance.UpdateHealthSlider(currentHealth, maxHealth);
+        AudioManager.Instance.PlaySound(AudioManager.Instance.hit);
+        StartCoroutine(WhiteFlash());
     }
 
 

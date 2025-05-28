@@ -13,6 +13,10 @@ public class AudioManager : MonoBehaviour
     public AudioSource boom2;
     public AudioSource hitRock;
     public AudioSource shoot;
+    public AudioSource zapped;
+    public AudioSource burned;
+    public AudioSource armorHit;
+    public AudioSource bossCharge;
 
 
     void Awake()

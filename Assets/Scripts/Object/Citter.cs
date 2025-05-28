@@ -4,6 +4,8 @@ public class Citter : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
     [SerializeField] Sprite[] sprites;
+    [SerializeField] GameObject zappedCitter;
+    [SerializeField] GameObject burendCitter;
 
     float elapsedTime = 0f;
     float intervalTime;
@@ -59,5 +61,24 @@ public class Citter : MonoBehaviour
         float randomX = Random.Range(-9f, 9f);
         float randomY = Random.Range(-5f, 5f);
         targetPosition = new Vector3(randomX, randomY, 0);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            AudioManager.Instance.PlayModifiedSound(AudioManager.Instance.zapped);
+            Instantiate(zappedCitter, transform.position, transform.rotation);
+            GameManager.Instance.critterCount++;
+            Destroy(gameObject);
+
+        }
+        if (other.gameObject.CompareTag("Player"))
+        {
+            AudioManager.Instance.PlayModifiedSound(AudioManager.Instance.burned);
+            Instantiate(burendCitter, transform.position, transform.rotation);
+            GameManager.Instance.critterCount++;
+            Destroy(gameObject);
+        }
     }
 }

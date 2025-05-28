@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5278919553673211951}
   - component: {fileID: 7187989625924400796}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 5 -asteroid_sprite_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 7051169044029597158}
   - component: {fileID: 2847312256052432644}
   - component: {fileID: 8445738472083596145}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Astroid
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

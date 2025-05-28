@@ -7,10 +7,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [SerializeField] public float worldSpeed;
+    [SerializeField] GameObject boss1;
+
+    public int critterCount;
 
 
 
-   
+
 
     void Awake()
     {
@@ -21,6 +24,17 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
+        }
+
+        critterCount = 0;
+    }
+
+    void Update()
+    {
+        if (critterCount > 10)
+        {
+            critterCount = 00;
+            Instantiate(boss1, new Vector2(15f, 0), Quaternion.Euler(0f, 0f, -90f));
         }
     }
 

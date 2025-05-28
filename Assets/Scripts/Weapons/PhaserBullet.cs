@@ -19,7 +19,7 @@ public class PhaserBullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Citter") || collision.gameObject.CompareTag("Boss"))
         {
             // Destroy(gameObject);
             gameObject.SetActive(false);
